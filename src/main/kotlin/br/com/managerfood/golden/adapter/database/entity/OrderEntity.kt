@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDate
 
-@Table("golden.tb_order")
+@Table("manager.tb_order")
 class OrderEntity(
 
     @Id

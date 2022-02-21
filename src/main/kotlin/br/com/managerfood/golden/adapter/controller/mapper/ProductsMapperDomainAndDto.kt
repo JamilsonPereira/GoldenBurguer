@@ -14,7 +14,8 @@ class ProductsMapperDomainAndDto {
                 products.id!!,
                 products.name,
                 products.description,
-                products.price
+                products.price,
+                mutableListOf()
             )
         }
     }
@@ -25,7 +26,9 @@ class ProductsMapperDomainAndDto {
                 products.id!!,
                 products.name,
                 products.description,
-                products.price
+                products.price,
+                mutableListOf()
+
             )
 
         }
@@ -36,7 +39,8 @@ class ProductsMapperDomainAndDto {
             null,
             requestProducts.name,
             requestProducts.description,
-            requestProducts.price
+            requestProducts.price,
+            mutableListOf()
         )
     }
 

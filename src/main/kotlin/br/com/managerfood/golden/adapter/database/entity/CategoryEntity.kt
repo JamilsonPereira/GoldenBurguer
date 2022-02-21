@@ -3,17 +3,19 @@ package br.com.managerfood.golden.adapter.database.entity
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
+import javax.annotation.Generated
 
-@Table("golden.tb_category")
+@Table("manager.tb_category")
 class CategoryEntity(
     @Id
-    @Column("id_category")
-    var id: Long,
+    @Column("id")
+    @Generated
+    var id: Long? = null,
 
     @Column("name")
-    var name: String,
+    var name: String? = "",
 
     @Column("description")
-    var description: String
+    var description: String? = ""
 
 )

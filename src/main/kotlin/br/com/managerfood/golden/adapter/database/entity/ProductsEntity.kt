@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 
-@Table("golden.tb_products")
+@Table("manager.tb_products")
 class ProductsEntity(
     @Id
     @Column("id_products")

@@ -5,5 +5,6 @@ class Product(
     var id: Long? = null,
     var name: String,
     var description: String,
-    var price: Float
+    var price: Float,
+    var category: MutableList<Category> = mutableListOf()
 )
