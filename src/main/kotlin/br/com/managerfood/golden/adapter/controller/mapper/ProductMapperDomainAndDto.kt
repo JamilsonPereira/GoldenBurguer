@@ -6,7 +6,7 @@ import br.com.managerfood.golden.domain.Product
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-class ProductsMapperDomainAndDto {
+class ProductMapperDomainAndDto {
 
     fun convertListDomainToResponse(domain: Flux<Product>): Flux<ProductResponse> {
         return domain.map { products ->

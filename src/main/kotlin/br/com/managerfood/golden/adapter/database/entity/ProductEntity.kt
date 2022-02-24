@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 
 @Table("manager.tb_products")
-class ProductsEntity(
+class ProductEntity(
     @Id
     @Column("id_products")
     var id: Long,
