@@ -1,7 +1,9 @@
 package br.com.managerfood.golden.adapter.gateway.db
 
 import br.com.managerfood.golden.adapter.database.repository.CategoryRepository
+import br.com.managerfood.golden.adapter.database.repository.ProductRepository
 import br.com.managerfood.golden.adapter.gateway.mapper.CategoryMapperDomainAndEntity
+import br.com.managerfood.golden.adapter.gateway.mapper.ProductMapperDomainAndEntity
 import br.com.managerfood.golden.domain.Category
 import br.com.managerfood.golden.domain.Product
 import org.springframework.stereotype.Component
@@ -12,11 +14,35 @@ import reactor.core.publisher.Mono
 class DbGatewayPostgresqlImpl constructor(
     private val categoryRepository: CategoryRepository,
     private val categoryMapperDomainAndEntity: CategoryMapperDomainAndEntity,
+    private val productMapperDomainAndEntity: ProductMapperDomainAndEntity,
+    private val productRepository: ProductRepository
 
 ): DbGatewayPostgresql{
     override fun findAllCategories(): Flux<Category> {
-        return categoryMapperDomainAndEntity.convertListEntityToDomain(categoryRepository.findAll())
+        return categoryMapperDomainAndEntity.convertListEntityToDomain(
+            categoryRepository.findAll())
 
+    }
+
+    override fun findCategoryById(idCategory: Long): Mono<Category> {
+        return categoryMapperDomainAndEntity.convertEntityToDomain(
+            categoryRepository.findById(idCategory))
+
+    }
+
+    override fun updateCategory(idCategory: Long, category: Category): Mono<Category> {
+        return Mono.just(category)
+            .flatMap {
+                categoryMapperDomainAndEntity.convertEntityToDomain(
+                    categoryRepository.save(
+                        categoryMapperDomainAndEntity.convertDomainToEntity(it)
+                    )
+                )
+            }
+    }
+
+    override fun deleteCategory(idCategory: Long): Mono<Void> {
+        return categoryRepository.deleteById(idCategory)
     }
 
     override fun createNewCategory(domain: Category): Mono<Category> {
@@ -29,10 +55,38 @@ class DbGatewayPostgresqlImpl constructor(
     }
 
     override fun createNewProduct(domain: Product): Mono<Product> {
-        return TODO("Not yet implemented")
+        return Mono
+            .just(domain)
+            .flatMap {
+                    productMapperDomainAndEntity.convertEntityToDomain(
+                        productRepository.save(
+                            productMapperDomainAndEntity.convertDomainToEntity(it)))
+            }
     }
 
     override fun findAllProducts(): Flux<Product> {
-        TODO("Not yet implemented")
+        return productMapperDomainAndEntity.convertListEntityToDomain(
+            productRepository.findAllProducts()
+        )
+    }
+
+    override fun findProductById(idProduct: Long): Mono<Product> {
+        return productMapperDomainAndEntity.convertEntityToDomain(productRepository.findById(idProduct))
+    }
+
+    override fun updateProduct(idProduct: Long, product: Product): Mono<Product> {
+
+        return Mono.just(product)
+            .flatMap {
+                productMapperDomainAndEntity.convertEntityToDomain(
+                    productRepository.save(
+                        productMapperDomainAndEntity.convertDomainToEntity(it)
+                    )
+                )
+            }
+    }
+
+    override fun deleteProduct(idProduct: Long): Mono<Void> {
+        return productRepository.deleteById(idProduct)
     }
 }
