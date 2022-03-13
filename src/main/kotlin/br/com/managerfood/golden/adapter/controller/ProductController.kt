@@ -8,6 +8,8 @@ import br.com.managerfood.golden.adapter.controller.mapper.ProductMapperDomainAn
 import br.com.managerfood.golden.adapter.database.entity.ProductEntity
 import br.com.managerfood.golden.adapter.database.repository.ProductRepository
 import br.com.managerfood.golden.usecase.product.CreateProduct
+import br.com.managerfood.golden.usecase.product.DeleteProduct
+import br.com.managerfood.golden.usecase.product.UpdateProduct
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
@@ -18,7 +20,9 @@ import reactor.core.publisher.Mono
 class ProductController(
     private val productRepository: ProductRepository,
     private val productMapperDomainAndDto: ProductMapperDomainAndDto,
-    private val createProduct: CreateProduct
+    private val createProduct: CreateProduct,
+    private val updateProduct: UpdateProduct,
+    private val deleteProduct: DeleteProduct
 
 ) {
     @GetMapping
@@ -41,5 +45,26 @@ class ProductController(
                 )
             }
     }
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun updateProduct(
+        @PathVariable("id") idProduct: Long,
+        @RequestBody request: ProductRequest
+    ): Mono<ProductResponse>{
+      return  Mono.just(request)
+            .flatMap {
+                productMapperDomainAndDto.convertDomainToResponse(
+                    updateProduct.execute(idProduct, productMapperDomainAndDto.convertRequestToDomain(it))
+                )
+            }
+    }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteProduct(
+        @PathVariable("id") idProduct: Long,
+        @RequestBody request: ProductRequest
+    ): Mono<Void>{
+        return deleteProduct.execute(idProduct)
+    }
 }

@@ -17,5 +17,8 @@ class ProductEntity(
     var description: String,
 
     @Column("price")
-    var price: Float
+    var price: Float,
+
+    @Column("id")
+    var idCategory: Long? = null
 )

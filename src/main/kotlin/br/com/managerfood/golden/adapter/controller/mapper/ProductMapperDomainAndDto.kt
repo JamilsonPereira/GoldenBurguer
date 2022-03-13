@@ -3,9 +3,11 @@ package br.com.managerfood.golden.adapter.controller.mapper
 import br.com.managerfood.golden.adapter.controller.dto.request.ProductRequest
 import br.com.managerfood.golden.adapter.controller.dto.response.ProductResponse
 import br.com.managerfood.golden.domain.Product
+import org.springframework.stereotype.Component
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
+@Component
 class ProductMapperDomainAndDto {
 
     fun convertListDomainToResponse(domain: Flux<Product>): Flux<ProductResponse> {

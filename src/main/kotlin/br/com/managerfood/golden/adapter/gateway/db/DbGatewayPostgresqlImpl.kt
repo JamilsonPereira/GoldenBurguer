@@ -30,7 +30,7 @@ class DbGatewayPostgresqlImpl constructor(
 
     }
 
-    override fun updateCategory(idCategory: Long, category: Category): Mono<Category> {
+    override fun updateCategory(category: Category): Mono<Category> {
         return Mono.just(category)
             .flatMap {
                 categoryMapperDomainAndEntity.convertEntityToDomain(
@@ -74,7 +74,7 @@ class DbGatewayPostgresqlImpl constructor(
         return productMapperDomainAndEntity.convertEntityToDomain(productRepository.findById(idProduct))
     }
 
-    override fun updateProduct(idProduct: Long, product: Product): Mono<Product> {
+    override fun updateProduct(product: Product): Mono<Product> {
 
         return Mono.just(product)
             .flatMap {

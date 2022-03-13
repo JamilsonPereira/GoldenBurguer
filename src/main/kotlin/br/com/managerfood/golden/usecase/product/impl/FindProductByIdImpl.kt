@@ -1,11 +1,12 @@
 package br.com.managerfood.golden.usecase.product.impl
 
-import br.com.managerfood.golden.adapter.database.repository.ProductRepository
 import br.com.managerfood.golden.adapter.gateway.db.DbGatewayPostgresql
 import br.com.managerfood.golden.domain.Product
 import br.com.managerfood.golden.usecase.product.FindProductById
+import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
+@Service
 class FindProductByIdImpl constructor(
     private val dbGatewayPostgresql: DbGatewayPostgresql
 ): FindProductById {
