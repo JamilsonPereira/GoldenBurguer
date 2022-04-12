@@ -1,10 +1,12 @@
 package br.com.managerfood.golden.domain
 
+import java.math.BigDecimal
+
 class Product(
 
     var id: Long? = null,
     var name: String,
     var description: String,
-    var price: Float,
-    var category: MutableList<Category> = mutableListOf()
+    var price: BigDecimal,
+    var idCategory: Long? = null
 )

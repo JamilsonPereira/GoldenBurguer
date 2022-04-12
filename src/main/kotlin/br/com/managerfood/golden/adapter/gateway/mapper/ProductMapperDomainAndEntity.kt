@@ -11,14 +11,14 @@ class ProductMapperDomainAndEntity {
 
     fun convertListEntityToDomain(
         product: Flux<ProductEntity>
-    ): Flux<Product>{
+    ): Flux<Product> {
         return product.map { productEntity ->
             Product(
                 productEntity.id,
-                productEntity.name,
-                productEntity.description,
-                productEntity.price,
-                mutableListOf()
+                productEntity.name!!,
+                productEntity.description!!,
+                productEntity.price!!,
+                productEntity.idCategory
 
             )
         }
@@ -26,27 +26,28 @@ class ProductMapperDomainAndEntity {
 
     fun convertEntityToDomain(
         product: Mono<ProductEntity>
-    ): Mono<Product>{
-        return  product.map {  productEntity ->
+    ): Mono<Product> {
+        return product.map { productEntity ->
             Product(
                 productEntity.id,
-                productEntity.name,
-                productEntity.description,
-                productEntity.price,
-                mutableListOf()
+                productEntity.name!!,
+                productEntity.description!!,
+                productEntity.price!!,
+                productEntity.idCategory
             )
         }
     }
 
     fun convertDomainToEntity(
         domain: Product
-    ): ProductEntity{
+    ): ProductEntity {
         return ProductEntity(
-            domain.id!!,
-            domain.name!!,
-            domain.description!!,
-            domain.price
-
+            null,
+            name = domain.name,
+            description = domain.description,
+            price = domain.price,
+            idCategory = domain.id!!
         )
+
     }
 }

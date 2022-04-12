@@ -8,7 +8,7 @@ import javax.annotation.Generated
 @Table("manager.tb_category")
 class CategoryEntity(
     @Id
-    @Column("id")
+    @Column("id_category")
     @Generated
     var id: Long? = null,
 

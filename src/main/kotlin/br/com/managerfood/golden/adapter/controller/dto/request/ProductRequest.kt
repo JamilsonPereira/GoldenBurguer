@@ -1,10 +1,10 @@
 package br.com.managerfood.golden.adapter.controller.dto.request
 
-import br.com.managerfood.golden.adapter.controller.dto.response.CategoryResponse
+import java.math.BigDecimal
 
 class ProductRequest(
-    var name: String,
-    var description: String,
-    var price: Float,
-    var category: MutableList<CategoryResponse> = mutableListOf()
+    var name: String? = "",
+    var description: String? = "",
+    var price: BigDecimal? = BigDecimal.ZERO,
+    var idCategory: Long? = null
 )

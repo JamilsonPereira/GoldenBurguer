@@ -1,8 +1,6 @@
 package br.com.managerfood.golden.adapter.controller
 
-import br.com.managerfood.golden.adapter.controller.dto.request.CategoryRequest
 import br.com.managerfood.golden.adapter.controller.dto.request.ProductRequest
-import br.com.managerfood.golden.adapter.controller.dto.response.CategoryResponse
 import br.com.managerfood.golden.adapter.controller.dto.response.ProductResponse
 import br.com.managerfood.golden.adapter.controller.mapper.ProductMapperDomainAndDto
 import br.com.managerfood.golden.adapter.database.entity.ProductEntity
@@ -37,13 +35,15 @@ class ProductController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createCategory(@RequestBody request : ProductRequest): Mono<ProductResponse>{
+    fun createProduct(@RequestBody request : ProductRequest): Mono<ProductResponse>{
         return Mono.just(request)
             .flatMap {
                 productMapperDomainAndDto.convertDomainToResponse(
-                    createProduct.execute(productMapperDomainAndDto.convertRequestToDomain(it) )
+                    createProduct.execute(productMapperDomainAndDto.convertRequestToDomain(it))
                 )
             }
+
+
     }
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -51,19 +51,16 @@ class ProductController(
         @PathVariable("id") idProduct: Long,
         @RequestBody request: ProductRequest
     ): Mono<ProductResponse>{
-      return  Mono.just(request)
-            .flatMap {
-                productMapperDomainAndDto.convertDomainToResponse(
-                    updateProduct.execute(idProduct, productMapperDomainAndDto.convertRequestToDomain(it))
+      return productMapperDomainAndDto.convertDomainToResponse(
+                    updateProduct.execute(idProduct, productMapperDomainAndDto.convertRequestToDomain(request))
                 )
             }
-    }
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteProduct(
         @PathVariable("id") idProduct: Long,
-        @RequestBody request: ProductRequest
     ): Mono<Void>{
         return deleteProduct.execute(idProduct)
     }

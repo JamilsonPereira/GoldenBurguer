@@ -17,7 +17,7 @@ class UpdateProductImpl(
                 dbGatewayPostgresql.findProductById(it)
                     .switchIfEmpty(Mono.error(NotFoundException()))
                     .flatMap {  productSaved ->
-                        productSaved.category = domain.category
+                        productSaved.idCategory = domain.idCategory
                         productSaved.price = domain.price
                         productSaved.name = domain.name
                         productSaved.description = domain.description

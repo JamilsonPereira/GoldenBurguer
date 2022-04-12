@@ -37,7 +37,7 @@ class CategoryMapperDomainAndEntity {
         domain: Category
     ): CategoryEntity{
         return CategoryEntity(
-            domain.id!!,
+            null,
             domain.name!!,
             domain.description!!,
 

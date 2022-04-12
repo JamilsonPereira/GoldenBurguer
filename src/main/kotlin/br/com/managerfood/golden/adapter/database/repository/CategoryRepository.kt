@@ -12,12 +12,12 @@ import reactor.core.publisher.Mono
 @Repository
 @Transactional
 interface CategoryRepository: ReactiveCrudRepository<CategoryEntity, Long> {
-    @Query("SELECT name, description, id FROM manager.tb_category")
+    @Query("SELECT * FROM manager.tb_category")
     fun findAllCategories(): Flux<CategoryEntity>
 
-    @Query("SELECT * FROM \"manager\".tb_category tc WHERE (tc.id = :id")
+    @Query("SELECT * FROM \"manager\".tb_category tc WHERE (tc.id_category = :idCategory")
     fun findCategoryById(
-        @Param("id") idCategory: Long
+        @Param("idCategory") idCategory: Long
     ): Mono<CategoryEntity>
 
 }

@@ -2,7 +2,7 @@ spring:
   r2dbc:
     url: r2dbc:pool:postgres://localhost:5432/postgres
     username: postgres
-    password: root
+    password: teste123
 
     #    url: r2dbc:pool:postgres://localhost:9001/postgres
     #    username: postgres

@@ -16,7 +16,7 @@ class ProductMapperDomainAndDto {
                 products.id!!,
                 products.name,
                 products.description,
-                products.price,
+                products.price!!,
                 mutableListOf()
             )
         }
@@ -37,13 +37,25 @@ class ProductMapperDomainAndDto {
     }
 
     fun convertRequestToDomain(requestProducts: ProductRequest): Product {
+
         return Product(
             null,
-            requestProducts.name,
-            requestProducts.description,
-            requestProducts.price,
-            mutableListOf()
+            name =  requestProducts.name!!,
+            description = requestProducts.description!!,
+            price = requestProducts.price!!,
+            idCategory = requestProducts.idCategory
         )
+//        var categories  = mutableListOf<Category>()
+//         val a = requestProducts.category!!.forEach {
+//                    categories.add(
+//                        Category(
+//                            null,
+//                            name = it.name,
+//                            description = it.description
+//                        )
+//                    )
+//                }
+
     }
 
 }
