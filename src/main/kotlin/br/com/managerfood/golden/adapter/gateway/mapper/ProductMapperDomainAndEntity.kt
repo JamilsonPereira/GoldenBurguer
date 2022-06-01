@@ -42,11 +42,11 @@ class ProductMapperDomainAndEntity {
         domain: Product
     ): ProductEntity {
         return ProductEntity(
-            null,
+            id = domain.id,
             name = domain.name,
             description = domain.description,
             price = domain.price,
-            idCategory = domain.id!!
+            idCategory = domain.idCategory!!
         )
 
     }

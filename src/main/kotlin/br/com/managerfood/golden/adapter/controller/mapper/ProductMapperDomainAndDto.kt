@@ -14,8 +14,8 @@ class ProductMapperDomainAndDto {
         return domain.map { products ->
             ProductResponse(
                 products.id!!,
-                products.name,
-                products.description,
+                products.name!!,
+                products.description!!,
                 products.price!!,
                 mutableListOf()
             )
@@ -26,9 +26,9 @@ class ProductMapperDomainAndDto {
         return domain.map { products ->
             ProductResponse(
                 products.id!!,
-                products.name,
-                products.description,
-                products.price,
+                products.name!!,
+                products.description!!,
+                products.price!!,
                 mutableListOf()
 
             )
