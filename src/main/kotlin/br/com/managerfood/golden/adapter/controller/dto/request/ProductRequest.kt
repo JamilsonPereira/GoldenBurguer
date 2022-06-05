@@ -6,5 +6,5 @@ class ProductRequest(
     var name: String? = "",
     var description: String? = "",
     var price: BigDecimal? = BigDecimal.ZERO,
-    var idCategory: Long? = null
+    var idCategory: Long? = 0
 )

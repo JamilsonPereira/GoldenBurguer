@@ -56,9 +56,9 @@ class DbGatewayPostgresqlImpl constructor(
 
     override fun createNewProduct(domain: Product): Mono<Product> {
         return Mono.just(domain).flatMap {
-            productMapperDomainAndEntity.convertEntityToDomain(
-                productRepository.save(productMapperDomainAndEntity.convertDomainToEntity(it))
-            )
+            var entity = productMapperDomainAndEntity.convertDomainToEntity(it)
+               productMapperDomainAndEntity.convertEntityToDomain( productRepository.save(entity))
+
 
         }
     }
